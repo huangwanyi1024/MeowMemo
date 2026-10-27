@@ -1,0 +1,5 @@
+{
+  "repository": "https://github.com/tensorflow/models",
+  "commit": "c14bf9ad91962cf189f9f58db2132c06247fcd53",
+  "weights": "https://storage.googleapis.com/audioset/yamnet.h5"
+}

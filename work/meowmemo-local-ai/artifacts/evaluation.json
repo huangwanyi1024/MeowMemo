@@ -1,0 +1,1800 @@
+{
+  "model_version": "catmeows-local-v2",
+  "dataset": "CatMeows 1.0.2 / 10.5281/zenodo.4008297",
+  "sample_count": 440,
+  "cat_count": 21,
+  "labels": [
+    "brushing",
+    "food",
+    "isolation"
+  ],
+  "class_counts": {
+    "brushing": 127,
+    "food": 92,
+    "isolation": 221
+  },
+  "split_seed": 42,
+  "development_cats": [
+    "BLE01",
+    "BRA01",
+    "BRI01",
+    "CLE01",
+    "DAK01",
+    "JJX01",
+    "LEO01",
+    "MAG01",
+    "MAT01",
+    "MEG01",
+    "MIN01",
+    "NUL01",
+    "SPI01",
+    "TIG01",
+    "WHO01"
+  ],
+  "test_cats": [
+    "ANI01",
+    "BAC01",
+    "CAN01",
+    "IND01",
+    "NIG01",
+    "REG01"
+  ],
+  "development_samples": 320,
+  "test_samples": 120,
+  "selected_C": 1.0,
+  "feature_mode": "combined",
+  "classifier_kind": "logistic",
+  "development_group_cv": {
+    "accuracy": 0.521875,
+    "macro_f1": 0.4730542222181018,
+    "confusion_matrix": [
+      [
+        35,
+        14,
+        22
+      ],
+      [
+        20,
+        25,
+        22
+      ],
+      [
+        43,
+        32,
+        107
+      ]
+    ],
+    "per_class": {
+      "brushing": {
+        "precision": 0.35714285714285715,
+        "recall": 0.49295774647887325,
+        "f1-score": 0.41420118343195267,
+        "support": 71.0
+      },
+      "food": {
+        "precision": 0.352112676056338,
+        "recall": 0.373134328358209,
+        "f1-score": 0.36231884057971014,
+        "support": 67.0
+      },
+      "isolation": {
+        "precision": 0.7086092715231788,
+        "recall": 0.5879120879120879,
+        "f1-score": 0.6426426426426426,
+        "support": 182.0
+      },
+      "accuracy": 0.521875,
+      "macro avg": {
+        "precision": 0.47262160157412464,
+        "recall": 0.4846680542497233,
+        "f1-score": 0.4730542222181018,
+        "support": 320.0
+      },
+      "weighted avg": {
+        "precision": 0.5559861861566752,
+        "recall": 0.521875,
+        "f1-score": 0.5332643978233442,
+        "support": 320.0
+      }
+    }
+  },
+  "candidate_group_cv": [
+    {
+      "features": "yamnet",
+      "classifier": "logistic",
+      "C": 0.01,
+      "macro_f1": 0.44983066422909124
+    },
+    {
+      "features": "yamnet",
+      "classifier": "logistic",
+      "C": 0.1,
+      "macro_f1": 0.45685547203072696
+    },
+    {
+      "features": "yamnet",
+      "classifier": "logistic",
+      "C": 1.0,
+      "macro_f1": 0.4641654641654642
+    },
+    {
+      "features": "yamnet",
+      "classifier": "svm",
+      "C": 1.0,
+      "macro_f1": 0.41568344671468055
+    },
+    {
+      "features": "yamnet",
+      "classifier": "svm",
+      "C": 10.0,
+      "macro_f1": 0.4222398803266825
+    },
+    {
+      "features": "mfcc",
+      "classifier": "logistic",
+      "C": 0.01,
+      "macro_f1": 0.33344369402709884
+    },
+    {
+      "features": "mfcc",
+      "classifier": "logistic",
+      "C": 0.1,
+      "macro_f1": 0.37471674449166414
+    },
+    {
+      "features": "mfcc",
+      "classifier": "logistic",
+      "C": 1.0,
+      "macro_f1": 0.40940170940170945
+    },
+    {
+      "features": "mfcc",
+      "classifier": "svm",
+      "C": 1.0,
+      "macro_f1": 0.3801320700545507
+    },
+    {
+      "features": "mfcc",
+      "classifier": "svm",
+      "C": 10.0,
+      "macro_f1": 0.3882872503840245
+    },
+    {
+      "features": "combined",
+      "classifier": "logistic",
+      "C": 0.01,
+      "macro_f1": 0.410117808063516
+    },
+    {
+      "features": "combined",
+      "classifier": "logistic",
+      "C": 0.1,
+      "macro_f1": 0.45251907123955215
+    },
+    {
+      "features": "combined",
+      "classifier": "logistic",
+      "C": 1.0,
+      "macro_f1": 0.4730542222181018
+    },
+    {
+      "features": "combined",
+      "classifier": "svm",
+      "C": 1.0,
+      "macro_f1": 0.37156318613011025
+    },
+    {
+      "features": "combined",
+      "classifier": "svm",
+      "C": 10.0,
+      "macro_f1": 0.39831209320640215
+    }
+  ],
+  "threshold_search_development_only": [
+    {
+      "threshold": 0.5,
+      "coverage": 0.709375,
+      "accuracy": 0.4933920704845815
+    },
+    {
+      "threshold": 0.55,
+      "coverage": 0.7,
+      "accuracy": 0.48660714285714285
+    },
+    {
+      "threshold": 0.6,
+      "coverage": 0.671875,
+      "accuracy": 0.4883720930232558
+    },
+    {
+      "threshold": 0.65,
+      "coverage": 0.625,
+      "accuracy": 0.495
+    },
+    {
+      "threshold": 0.7,
+      "coverage": 0.5875,
+      "accuracy": 0.4946808510638298
+    },
+    {
+      "threshold": 0.75,
+      "coverage": 0.5375,
+      "accuracy": 0.5
+    },
+    {
+      "threshold": 0.8,
+      "coverage": 0.49375,
+      "accuracy": 0.5063291139240507
+    }
+  ],
+  "thresholds": {
+    "context": 0.6,
+    "margin": 0.15,
+    "cat_event": 0.1,
+    "silence_rms": 0.0001
+  },
+  "heldout_test_before_abstention": {
+    "accuracy": 0.4,
+    "macro_f1": 0.3721463721463721,
+    "confusion_matrix": [
+      [
+        30,
+        18,
+        8
+      ],
+      [
+        7,
+        10,
+        8
+      ],
+      [
+        6,
+        25,
+        8
+      ]
+    ],
+    "per_class": {
+      "brushing": {
+        "precision": 0.6976744186046512,
+        "recall": 0.5357142857142857,
+        "f1-score": 0.6060606060606061,
+        "support": 56.0
+      },
+      "food": {
+        "precision": 0.18867924528301888,
+        "recall": 0.4,
+        "f1-score": 0.2564102564102564,
+        "support": 25.0
+      },
+      "isolation": {
+        "precision": 0.3333333333333333,
+        "recall": 0.20512820512820512,
+        "f1-score": 0.25396825396825395,
+        "support": 39.0
+      },
+      "accuracy": 0.4,
+      "macro avg": {
+        "precision": 0.4065623324070011,
+        "recall": 0.38028083028083026,
+        "f1-score": 0.3721463721463721,
+        "support": 120.0
+      },
+      "weighted avg": {
+        "precision": 0.4732229047827995,
+        "recall": 0.4,
+        "f1-score": 0.41878676878676874,
+        "support": 120.0
+      }
+    }
+  },
+  "majority_baseline_test": {
+    "accuracy": 0.325,
+    "macro_f1": 0.16352201257861634,
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        56
+      ],
+      [
+        0,
+        0,
+        25
+      ],
+      [
+        0,
+        0,
+        39
+      ]
+    ],
+    "per_class": {
+      "brushing": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 56.0
+      },
+      "food": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 25.0
+      },
+      "isolation": {
+        "precision": 0.325,
+        "recall": 1.0,
+        "f1-score": 0.49056603773584906,
+        "support": 39.0
+      },
+      "accuracy": 0.325,
+      "macro avg": {
+        "precision": 0.10833333333333334,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.16352201257861634,
+        "support": 120.0
+      },
+      "weighted avg": {
+        "precision": 0.10562500000000001,
+        "recall": 0.325,
+        "f1-score": 0.15943396226415094,
+        "support": 120.0
+      }
+    }
+  },
+  "heldout_test_with_abstention": {
+    "accepted": 72,
+    "total": 120,
+    "coverage": 0.6,
+    "accuracy_on_accepted": 0.3055555555555556
+  },
+  "test_predictions": [
+    {
+      "file": "B_ANI01_MC_FN_SIM01_101.wav",
+      "cat": "ANI01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.003266935935243964,
+        "food": 0.9029095768928528,
+        "isolation": 0.09382344782352448
+      }
+    },
+    {
+      "file": "B_ANI01_MC_FN_SIM01_102.wav",
+      "cat": "ANI01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.967821478843689,
+        "food": 0.03183998912572861,
+        "isolation": 0.0003385139279998839
+      }
+    },
+    {
+      "file": "B_ANI01_MC_FN_SIM01_103.wav",
+      "cat": "ANI01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.00019008277740795165,
+        "food": 0.5012611150741577,
+        "isolation": 0.4985487759113312
+      }
+    },
+    {
+      "file": "B_ANI01_MC_FN_SIM01_301.wav",
+      "cat": "ANI01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9999390840530396,
+        "food": 4.881877248408273e-05,
+        "isolation": 1.1999764865322504e-05
+      }
+    },
+    {
+      "file": "B_ANI01_MC_FN_SIM01_302.wav",
+      "cat": "ANI01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.6488456130027771,
+        "food": 0.00014297920279204845,
+        "isolation": 0.35101139545440674
+      }
+    },
+    {
+      "file": "B_ANI01_MC_FN_SIM01_303.wav",
+      "cat": "ANI01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.1083921268582344,
+        "food": 0.8856076002120972,
+        "isolation": 0.006000292021781206
+      }
+    },
+    {
+      "file": "B_BAC01_MC_MN_SIM01_101.wav",
+      "cat": "BAC01",
+      "actual": "brushing",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.22027459740638733,
+        "food": 0.138100728392601,
+        "isolation": 0.6416247487068176
+      }
+    },
+    {
+      "file": "B_BAC01_MC_MN_SIM01_102.wav",
+      "cat": "BAC01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.905098021030426,
+        "food": 0.0719081237912178,
+        "isolation": 0.02299383282661438
+      }
+    },
+    {
+      "file": "B_BAC01_MC_MN_SIM01_103.wav",
+      "cat": "BAC01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.5963695645332336,
+        "food": 0.09469928592443466,
+        "isolation": 0.3089311122894287
+      }
+    },
+    {
+      "file": "B_BAC01_MC_MN_SIM01_202.wav",
+      "cat": "BAC01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.994853675365448,
+        "food": 0.004642135463654995,
+        "isolation": 0.0005042908014729619
+      }
+    },
+    {
+      "file": "B_BAC01_MC_MN_SIM01_301.wav",
+      "cat": "BAC01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.6903948187828064,
+        "food": 0.30940675735473633,
+        "isolation": 0.00019834893464576453
+      }
+    },
+    {
+      "file": "B_BAC01_MC_MN_SIM01_303.wav",
+      "cat": "BAC01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9972203969955444,
+        "food": 0.0024387321900576353,
+        "isolation": 0.0003408021875657141
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_101.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0051956260576844215,
+        "food": 0.9947686195373535,
+        "isolation": 3.577435563784093e-05
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_102.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.5623219013214111,
+        "food": 0.43453848361968994,
+        "isolation": 0.0031396099366247654
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_103.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0023871471639722586,
+        "food": 0.9973400235176086,
+        "isolation": 0.00027286188560537994
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_104.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.02715666964650154,
+        "food": 0.9715844988822937,
+        "isolation": 0.0012589205289259553
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_105.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.9087395071983337,
+        "food": 0.08733829855918884,
+        "isolation": 0.003922180272638798
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_201.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.6100712418556213,
+        "food": 0.11480244994163513,
+        "isolation": 0.27512624859809875
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_202.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.000526020594406873,
+        "food": 0.9863390922546387,
+        "isolation": 0.013134836219251156
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_203.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0122750885784626,
+        "food": 0.9877185821533203,
+        "isolation": 6.338182629406219e-06
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_204.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.004985563922673464,
+        "food": 0.9912406802177429,
+        "isolation": 0.0037737791426479816
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_205.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.009058554656803608,
+        "food": 0.9849163293838501,
+        "isolation": 0.006025172770023346
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_206.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.16766083240509033,
+        "food": 0.5054227709770203,
+        "isolation": 0.326916366815567
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_207.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.5558249354362488,
+        "food": 0.43994709849357605,
+        "isolation": 0.004227924160659313
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_208.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.05691354721784592,
+        "food": 0.9419552683830261,
+        "isolation": 0.001131261233240366
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_209.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.06804516166448593,
+        "food": 0.7894430756568909,
+        "isolation": 0.14251172542572021
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_210.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.20538876950740814,
+        "food": 0.003438018960878253,
+        "isolation": 0.7911732196807861
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_301.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.5423617362976074,
+        "food": 0.45150646567344666,
+        "isolation": 0.006131795234978199
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_302.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.8975732326507568,
+        "food": 0.016590194776654243,
+        "isolation": 0.08583653718233109
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_303.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.936977744102478,
+        "food": 0.0626852959394455,
+        "isolation": 0.00033701048232614994
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_304.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.7387423515319824,
+        "food": 0.19884155690670013,
+        "isolation": 0.06241612508893013
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_305.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.9005820155143738,
+        "food": 0.048124801367521286,
+        "isolation": 0.05129313841462135
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_306.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.7368094325065613,
+        "food": 0.20974089205265045,
+        "isolation": 0.053449682891368866
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_307.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.02473835088312626,
+        "food": 0.974575400352478,
+        "isolation": 0.0006862491718493402
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_308.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.6073846817016602,
+        "food": 0.22604167461395264,
+        "isolation": 0.1665736734867096
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_309.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.9336559176445007,
+        "food": 0.05724165961146355,
+        "isolation": 0.009102516807615757
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_310.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.893390953540802,
+        "food": 0.10168058425188065,
+        "isolation": 0.004928370006382465
+      }
+    },
+    {
+      "file": "B_CAN01_EU_FN_GIA01_311.wav",
+      "cat": "CAN01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0414615236222744,
+        "food": 0.9497876167297363,
+        "isolation": 0.008750850334763527
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_101.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.7653025388717651,
+        "food": 0.22467339038848877,
+        "isolation": 0.010024105198681355
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_102.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.00011540808191057295,
+        "food": 0.6572062373161316,
+        "isolation": 0.34267836809158325
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_103.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.15580220520496368,
+        "food": 0.0016463500214740634,
+        "isolation": 0.8425514101982117
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_201.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.019906876608729362,
+        "food": 0.8893334269523621,
+        "isolation": 0.09075971692800522
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_202.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.9265136122703552,
+        "food": 0.0049157654866576195,
+        "isolation": 0.06857059895992279
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_203.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9976590871810913,
+        "food": 0.001959480345249176,
+        "isolation": 0.00038139751995913684
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_301.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 2.3109139874577522e-05,
+        "food": 9.215186764777172e-06,
+        "isolation": 0.9999676942825317
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_302.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9897133111953735,
+        "food": 0.009417830966413021,
+        "isolation": 0.0008688060333952308
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_303.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9893507361412048,
+        "food": 0.0014160384889692068,
+        "isolation": 0.009233303368091583
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_304.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.9938884377479553,
+        "food": 2.5926037778845057e-05,
+        "isolation": 0.006085613276809454
+      }
+    },
+    {
+      "file": "B_IND01_EU_FN_ELI01_305.wav",
+      "cat": "IND01",
+      "actual": "brushing",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.0015385595615953207,
+        "food": 0.9483326077461243,
+        "isolation": 0.0501287467777729
+      }
+    },
+    {
+      "file": "B_NIG01_MC_MN_SIM01_101.wav",
+      "cat": "NIG01",
+      "actual": "brushing",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 3.264050610596314e-05,
+        "food": 0.000217580862226896,
+        "isolation": 0.9997497200965881
+      }
+    },
+    {
+      "file": "B_NIG01_MC_MN_SIM01_102.wav",
+      "cat": "NIG01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.5940600633621216,
+        "food": 0.27346333861351013,
+        "isolation": 0.13247661292552948
+      }
+    },
+    {
+      "file": "B_NIG01_MC_MN_SIM01_103.wav",
+      "cat": "NIG01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.951318621635437,
+        "food": 0.025951027870178223,
+        "isolation": 0.022730251774191856
+      }
+    },
+    {
+      "file": "B_NIG01_MC_MN_SIM01_201.wav",
+      "cat": "NIG01",
+      "actual": "brushing",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.047112226486206055,
+        "food": 0.05735648050904274,
+        "isolation": 0.8955312967300415
+      }
+    },
+    {
+      "file": "B_REG01_EU_FN_GIO01_101.wav",
+      "cat": "REG01",
+      "actual": "brushing",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.3696039021015167,
+        "food": 0.08243420720100403,
+        "isolation": 0.5479618906974792
+      }
+    },
+    {
+      "file": "B_REG01_EU_FN_GIO01_102.wav",
+      "cat": "REG01",
+      "actual": "brushing",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.2380543053150177,
+        "food": 7.491896394640207e-05,
+        "isolation": 0.761870801448822
+      }
+    },
+    {
+      "file": "B_REG01_EU_FN_GIO01_201.wav",
+      "cat": "REG01",
+      "actual": "brushing",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.9493542313575745,
+        "food": 0.050600823014974594,
+        "isolation": 4.490332503337413e-05
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_101.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.4595177471637726,
+        "food": 0.07527472823858261,
+        "isolation": 0.4652075171470642
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_102.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 1.0614174925649422e-06,
+        "food": 0.999998927116394,
+        "isolation": 6.686191877935954e-11
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_103.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.8218541145324707,
+        "food": 0.15616491436958313,
+        "isolation": 0.02198105864226818
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_104.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.08560772240161896,
+        "food": 0.867095947265625,
+        "isolation": 0.04729631915688515
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_105.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.015800489112734795,
+        "food": 0.7642014026641846,
+        "isolation": 0.21999816596508026
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_201.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9952901601791382,
+        "food": 0.004352755844593048,
+        "isolation": 0.00035711657255887985
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_202.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.006052181124687195,
+        "food": 1.3409606253844686e-05,
+        "isolation": 0.9939344525337219
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_203.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.7919616103172302,
+        "food": 0.001635769265703857,
+        "isolation": 0.20640259981155396
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_301.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.20033122599124908,
+        "food": 0.704522967338562,
+        "isolation": 0.09514577686786652
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_302.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.01795797049999237,
+        "food": 0.5727226734161377,
+        "isolation": 0.4093194305896759
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_303.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.0631241574883461,
+        "food": 0.05733570456504822,
+        "isolation": 0.8795401453971863
+      }
+    },
+    {
+      "file": "F_BAC01_MC_MN_SIM01_304.wav",
+      "cat": "BAC01",
+      "actual": "food",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9236916303634644,
+        "food": 0.00016953484737314284,
+        "isolation": 0.07613881677389145
+      }
+    },
+    {
+      "file": "F_CAN01_EU_FN_GIA01_201.wav",
+      "cat": "CAN01",
+      "actual": "food",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.8074925541877747,
+        "food": 0.03313110023736954,
+        "isolation": 0.15937639772891998
+      }
+    },
+    {
+      "file": "F_CAN01_EU_FN_GIA01_202.wav",
+      "cat": "CAN01",
+      "actual": "food",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.5867881774902344,
+        "food": 0.2631019055843353,
+        "isolation": 0.1501099318265915
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_101.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.11489174515008926,
+        "food": 0.41411301493644714,
+        "isolation": 0.4709952473640442
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_102.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.0802970603108406,
+        "food": 0.8207738995552063,
+        "isolation": 0.09892909973859787
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_103.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.024953946471214294,
+        "food": 0.08579500764608383,
+        "isolation": 0.8892509937286377
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_104.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.007650403305888176,
+        "food": 0.9843916893005371,
+        "isolation": 0.00795783195644617
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_201.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 6.740439857821912e-05,
+        "food": 9.814154509513173e-06,
+        "isolation": 0.9999227523803711
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_202.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": false,
+      "scores": {
+        "brushing": 1.1296212537137498e-17,
+        "food": 1.0,
+        "isolation": 3.997562103563723e-08
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_203.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.24601636826992035,
+        "food": 0.017392562702298164,
+        "isolation": 0.736591100692749
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_301.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.1687639057636261,
+        "food": 0.7550419569015503,
+        "isolation": 0.0761941596865654
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_302.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.07997284084558487,
+        "food": 0.4042147099971771,
+        "isolation": 0.5158125162124634
+      }
+    },
+    {
+      "file": "F_IND01_EU_FN_ELI01_304.wav",
+      "cat": "IND01",
+      "actual": "food",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.2612327039241791,
+        "food": 0.729051947593689,
+        "isolation": 0.009715409018099308
+      }
+    },
+    {
+      "file": "F_REG01_EU_FN_GIO01_201.wav",
+      "cat": "REG01",
+      "actual": "food",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.999894380569458,
+        "food": 9.844134041259167e-08,
+        "isolation": 0.00010545418626861647
+      }
+    },
+    {
+      "file": "I_ANI01_MC_FN_SIM01_101.wav",
+      "cat": "ANI01",
+      "actual": "isolation",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.023474108427762985,
+        "food": 0.0053158113732934,
+        "isolation": 0.9712101221084595
+      }
+    },
+    {
+      "file": "I_ANI01_MC_FN_SIM01_102.wav",
+      "cat": "ANI01",
+      "actual": "isolation",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 1.2311903674344649e-07,
+        "food": 3.5374216622585664e-06,
+        "isolation": 0.9999963045120239
+      }
+    },
+    {
+      "file": "I_ANI01_MC_FN_SIM01_103.wav",
+      "cat": "ANI01",
+      "actual": "isolation",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 1.657305983826518e-05,
+        "food": 7.852441740396898e-06,
+        "isolation": 0.9999755620956421
+      }
+    },
+    {
+      "file": "I_ANI01_MC_FN_SIM01_104.wav",
+      "cat": "ANI01",
+      "actual": "isolation",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.6482759118080139,
+        "food": 0.0024316119961440563,
+        "isolation": 0.34929245710372925
+      }
+    },
+    {
+      "file": "I_BAC01_MC_MN_SIM01_101.wav",
+      "cat": "BAC01",
+      "actual": "isolation",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.9598298072814941,
+        "food": 0.00017797114560380578,
+        "isolation": 0.03999226912856102
+      }
+    },
+    {
+      "file": "I_BAC01_MC_MN_SIM01_102.wav",
+      "cat": "BAC01",
+      "actual": "isolation",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.0001299583091167733,
+        "food": 0.13333070278167725,
+        "isolation": 0.8665392994880676
+      }
+    },
+    {
+      "file": "I_BAC01_MC_MN_SIM01_103.wav",
+      "cat": "BAC01",
+      "actual": "isolation",
+      "predicted": "isolation",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.0007960855145938694,
+        "food": 4.4421736674848944e-05,
+        "isolation": 0.9991594552993774
+      }
+    },
+    {
+      "file": "I_BAC01_MC_MN_SIM01_301.wav",
+      "cat": "BAC01",
+      "actual": "isolation",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9998188614845276,
+        "food": 7.421339978463948e-05,
+        "isolation": 0.00010689154441934079
+      }
+    },
+    {
+      "file": "I_BAC01_MC_MN_SIM01_302.wav",
+      "cat": "BAC01",
+      "actual": "isolation",
+      "predicted": "brushing",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.9796129465103149,
+        "food": 0.017609883099794388,
+        "isolation": 0.0027771585155278444
+      }
+    },
+    {
+      "file": "I_BAC01_MC_MN_SIM01_303.wav",
+      "cat": "BAC01",
+      "actual": "isolation",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.9973666071891785,
+        "food": 0.0002925346198026091,
+        "isolation": 0.0023409812711179256
+      }
+    },
+    {
+      "file": "I_BAC01_MC_MN_SIM10_102.wav",
+      "cat": "BAC01",
+      "actual": "isolation",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 8.383668500755448e-06,
+        "food": 0.2947395443916321,
+        "isolation": 0.7052520513534546
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_101.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.026295529678463936,
+        "food": 0.8597491979598999,
+        "isolation": 0.11395524442195892
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_102.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.005300894845277071,
+        "food": 0.670722484588623,
+        "isolation": 0.32397669553756714
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_103.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0003519046294968575,
+        "food": 0.9995837807655334,
+        "isolation": 6.434726674342528e-05
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_104.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0010986995184794068,
+        "food": 0.7425462007522583,
+        "isolation": 0.2563551068305969
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_105.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 1.8831640247185533e-08,
+        "food": 1.0,
+        "isolation": 2.023070244661085e-08
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_106.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0009460101136937737,
+        "food": 0.998766303062439,
+        "isolation": 0.00028764590388163924
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_107.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 1.0188484338868875e-05,
+        "food": 0.9999892711639404,
+        "isolation": 5.471154622682661e-07
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_201.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 3.15315555781126e-05,
+        "food": 0.9999611377716064,
+        "isolation": 7.285413630597759e-06
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_202.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 5.334751040209085e-05,
+        "food": 0.9997672438621521,
+        "isolation": 0.0001793664414435625
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_203.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.1546289473772049,
+        "food": 0.784455418586731,
+        "isolation": 0.06091559678316116
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_204.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.010263784788548946,
+        "food": 0.9830632209777832,
+        "isolation": 0.006673064082860947
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_205.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 6.038577703293413e-05,
+        "food": 0.9993240833282471,
+        "isolation": 0.0006155614391900599
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_206.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.003557914635166526,
+        "food": 0.9956194758415222,
+        "isolation": 0.0008226796053349972
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_207.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 1.9050513628826593e-06,
+        "food": 0.9999951124191284,
+        "isolation": 2.997418278027908e-06
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_208.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0002512505161575973,
+        "food": 0.9996916055679321,
+        "isolation": 5.7217952416976914e-05
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_209.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.1304013878107071,
+        "food": 0.04419814050197601,
+        "isolation": 0.8254004716873169
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_210.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0024690511636435986,
+        "food": 0.9973305463790894,
+        "isolation": 0.00020040199160575867
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_211.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.00014267898222897202,
+        "food": 0.9987804293632507,
+        "isolation": 0.0010769867803901434
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_212.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.00014397497579921037,
+        "food": 0.9997853636741638,
+        "isolation": 7.066224497975782e-05
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_301.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0027983991894870996,
+        "food": 0.9951529502868652,
+        "isolation": 0.00204868265427649
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_302.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 6.536904402310029e-05,
+        "food": 0.9998561143875122,
+        "isolation": 7.860229379730299e-05
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_303.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.011595740914344788,
+        "food": 0.9853836894035339,
+        "isolation": 0.0030205894727259874
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_304.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.00031159090576693416,
+        "food": 0.9767993092536926,
+        "isolation": 0.022889116778969765
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_305.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 3.963225026382133e-06,
+        "food": 0.9999945163726807,
+        "isolation": 1.5655085690013948e-06
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_306.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.0030904486775398254,
+        "food": 0.9917435050010681,
+        "isolation": 0.005166111513972282
+      }
+    },
+    {
+      "file": "I_CAN01_EU_FN_GIA01_307.wav",
+      "cat": "CAN01",
+      "actual": "isolation",
+      "predicted": "food",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.00032829196425154805,
+        "food": 0.9996674060821533,
+        "isolation": 4.334362984081963e-06
+      }
+    },
+    {
+      "file": "I_NIG01_MC_MN_SIM01_201.wav",
+      "cat": "NIG01",
+      "actual": "isolation",
+      "predicted": "isolation",
+      "accepted": true,
+      "scores": {
+        "brushing": 0.07234407216310501,
+        "food": 0.047798529267311096,
+        "isolation": 0.8798574209213257
+      }
+    },
+    {
+      "file": "I_REG01_EU_FN_GIO01_201.wav",
+      "cat": "REG01",
+      "actual": "isolation",
+      "predicted": "brushing",
+      "accepted": false,
+      "scores": {
+        "brushing": 0.561504602432251,
+        "food": 0.024084310978651047,
+        "isolation": 0.41441109776496887
+      }
+    }
+  ],
+  "warning": "Exploratory baseline comparison after seeing v1 test failure; same test partition reused, not a pristine final benchmark. Model/threshold selected by development group-CV only. Scores not calibrated. Not tested on owner cats.",
+  "deployed_policy": {
+    "context_suggestions_enabled": false,
+    "context_coverage": 0,
+    "reason": "Cross-cat validation insufficient; raw experimental candidates are not accepted suggestions.",
+    "global_readiness_macro_f1": 0.65,
+    "initial_abstention_metrics_are_not_deployed_policy": true
+  }
+}

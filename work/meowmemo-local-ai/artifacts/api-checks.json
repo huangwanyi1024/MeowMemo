@@ -1,0 +1,108 @@
+[
+  {
+    "case": "silence",
+    "result": {
+      "modelVersion": "catmeows-local-v2",
+      "source": "local-acoustic-model",
+      "analyzedAt": "2026-10-26T22:46:12.484149+00:00",
+      "duration": 3.0,
+      "runtime": "CPU \u00b7 offline",
+      "thresholds": {
+        "context": 0.6,
+        "margin": 0.15,
+        "cat_event": 0.1,
+        "silence_rms": 0.0001
+      },
+      "notATranslation": true,
+      "status": "uncertain",
+      "suggestion": null,
+      "reason": "too-short-or-quiet",
+      "scores": {},
+      "elapsedMs": 0
+    }
+  },
+  {
+    "case": "sine",
+    "result": {
+      "modelVersion": "catmeows-local-v2",
+      "source": "local-acoustic-model",
+      "analyzedAt": "2026-10-26T22:46:12.486693+00:00",
+      "duration": 3.0,
+      "runtime": "CPU \u00b7 offline",
+      "thresholds": {
+        "context": 0.6,
+        "margin": 0.15,
+        "cat_event": 0.1,
+        "silence_rms": 0.0001
+      },
+      "notATranslation": true,
+      "status": "uncertain",
+      "suggestion": null,
+      "experimentalTopCandidate": "food",
+      "reason": "cat-sound-not-clear",
+      "scores": {
+        "brushing": 6.407204100611352e-09,
+        "food": 1.0,
+        "isolation": 7.759845442806195e-36
+      },
+      "catEventScore": 1.93487581512386e-09,
+      "audioEvents": [
+        {
+          "label": "Telephone",
+          "score": 0.9931331276893616
+        },
+        {
+          "label": "Dial tone",
+          "score": 0.9779210686683655
+        },
+        {
+          "label": "Alarm",
+          "score": 0.9688625931739807
+        }
+      ],
+      "elapsedMs": 7
+    }
+  },
+  {
+    "case": "noise",
+    "result": {
+      "modelVersion": "catmeows-local-v2",
+      "source": "local-acoustic-model",
+      "analyzedAt": "2026-10-26T22:46:12.495808+00:00",
+      "duration": 3.0,
+      "runtime": "CPU \u00b7 offline",
+      "thresholds": {
+        "context": 0.6,
+        "margin": 0.15,
+        "cat_event": 0.1,
+        "silence_rms": 0.0001
+      },
+      "notATranslation": true,
+      "status": "uncertain",
+      "suggestion": null,
+      "experimentalTopCandidate": "brushing",
+      "reason": "cat-sound-not-clear",
+      "scores": {
+        "brushing": 0.9997370839118958,
+        "food": 4.1515966131555615e-07,
+        "isolation": 0.0002625209162943065
+      },
+      "catEventScore": 0.07253116369247437,
+      "audioEvents": [
+        {
+          "label": "White noise",
+          "score": 0.37230411171913147
+        },
+        {
+          "label": "Waterfall",
+          "score": 0.36301133036613464
+        },
+        {
+          "label": "Static",
+          "score": 0.28464797139167786
+        }
+      ],
+      "elapsedMs": 8
+    }
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "device": "Apple M5 CPU only",
+  "startup_model_load_seconds": 1.355955041013658,
+  "warm_inference": {
+    "3s": {
+      "median_ms": 6.360103376209736,
+      "p95_ms": 6.620703591033816
+    },
+    "15s": {
+      "median_ms": 20.968187367543578,
+      "p95_ms": 21.161329350434244
+    }
+  },
+  "peak_process_memory_mb": 520.3125,
+  "fixture": "Public CatMeows waveform repeated to benchmark duration; not accuracy evidence",
+  "excludes": "Browser upload, ffmpeg decode, network, cold Python/TensorFlow import"
+}

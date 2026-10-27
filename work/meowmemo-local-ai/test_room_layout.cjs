@@ -1,0 +1,7 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const source=fs.readFileSync(require('path').resolve(__dirname,'../../outputs/meowmemo-prototype/app.js'),'utf8');
+const start=source.indexOf('const roomCatSlots='),end=source.indexOf('const state=',start),c=vm.createContext({});vm.runInContext(source.slice(start,end),c);
+for(const a of ['tree','sofa','desk','window','tv'])for(const b of ['tree','sofa','desk','window','tv']){c.cats=[{id:'a',spot:a},{id:'b',spot:b}];const result=vm.runInContext('roomCatLayouts(cats)',c);for(const p of result){assert(p.left>=0&&p.left+p.width<100);assert(p.top>=0&&p.top<100)}if(a===b){assert.equal(result[1].slot,1);assert(result[0].x!==result[1].x||result[0].y!==result[1].y)}}
+c.cats=[{id:'a',spot:'tree'},{id:'b',spot:'tree'}];let r=vm.runInContext('roomCatLayouts(cats)',c);assert(r[1].top>r[0].top+r[0].w/620*100,'tree cats occupy nonoverlapping levels');
+c.cats=[{id:'a',spot:'desk'},{id:'b',spot:'tree'}];r=vm.runInContext('roomCatLayouts(cats,{place:"tree",catIds:["a","b"]})',c);assert.equal(r[0].spot,'tree');assert.equal(r[1].slot,1);r=vm.runInContext('roomCatLayouts(cats,{place:"tree",catIds:["a","b"]},true)',c);assert.equal(r[0].spot,'desk');assert.equal(r[1].slot,0);r=vm.runInContext('roomCatLayouts(cats)',c);assert.equal(r[0].spot,'desk');
+console.log('PASS: all 25 spot combinations, bounded proportions, tree upper/lower separation, playback collision handling, keep-position and saved-position restoration.');

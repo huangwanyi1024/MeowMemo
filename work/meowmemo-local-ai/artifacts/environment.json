@@ -1,0 +1,19 @@
+{
+  "python": "3.12.14",
+  "architecture": "arm64",
+  "hardware": "MacBook Air / Apple M5 / 10-core CPU / 10-core GPU / 16 GB unified memory",
+  "device_used": "CPU only; no Metal plugin installed",
+  "versions": {
+    "tensorflow": "2.21.0",
+    "tf-keras": "2.21.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "numpy": "2.5.4",
+    "soundfile": "0.14.0",
+    "fastapi": "0.162.0",
+    "uvicorn": "0.54.0",
+    "python-multipart": "0.0.32"
+  },
+  "yamnet_weights_sha256": "13c3308955bbfaef262f175ac9c40e47b134573a93984f009220dd7cc12a1744",
+  "dataset_md5": "b5fa911bcd6514e39dfef6876f747df4"
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "brushing",
+    "name": "B_CAN01_EU_FN_GIA01_1SEQ1.wav",
+    "actual": "brushing",
+    "description": "Brushing",
+    "source": "Public CatMeows supplementary recording",
+    "directory": "extras",
+    "playbackFile": "brushing-preview.wav",
+    "duration": 9.09,
+    "playbackGainDb": 12.0,
+    "audioVersion": "5bc32ee085b5",
+    "sourceSha256": "ab5eb2fa18a5f8e1d3c7934a17e54cc0b5f5e9e4442bdf724ff84485f91e4c1b",
+    "selection": "Longer natural sequence selected for audibility, not context prediction correctness.",
+    "evaluationUse": "Listening example only; not an independent test result. Cat may occur in training."
+  },
+  {
+    "id": "food",
+    "name": "F_SPI01_EU_MN_NAI01_1SEQ1.wav",
+    "actual": "food",
+    "description": "Waiting for food",
+    "source": "Public CatMeows supplementary recording",
+    "directory": "extras",
+    "playbackFile": "food-preview.wav",
+    "duration": 12.3,
+    "playbackGainDb": 12.0,
+    "audioVersion": "bd38fb796fd1",
+    "sourceSha256": "d48f209fbeef39b9c34e1defcbe99863329f729d5bd1a617cc8ef43caf73b713",
+    "selection": "Longer natural sequence selected for audibility, not context prediction correctness.",
+    "evaluationUse": "Listening example only; not an independent test result. Cat may occur in training."
+  },
+  {
+    "id": "isolation",
+    "name": "I_CAN01_EU_FN_GIA01_1SEQ1.wav",
+    "actual": "isolation",
+    "description": "Isolation in an unfamiliar environment",
+    "source": "Public CatMeows supplementary recording",
+    "directory": "extras",
+    "playbackFile": "isolation-preview.wav",
+    "duration": 7.4,
+    "playbackGainDb": 12.0,
+    "audioVersion": "cfaf5cbb9c70",
+    "sourceSha256": "65a74af73b0f03e6760cc99b07cf241f57dcfe41f1a0e1f5b2d276a49a4a6b12",
+    "selection": "Longer natural sequence selected for audibility, not context prediction correctness.",
+    "evaluationUse": "Listening example only; not an independent test result. Cat may occur in training."
+  }
+]

@@ -1,0 +1,28 @@
+# Credentials and personal browser exports
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*backup*.json
+*share-card*.png
+MeowMemo_Plan.pdf
+# Downloaded environments, full research datasets and language models
+.venv*/
+venv/
+**/runtime/
+**/local-models/
+**/data/catmeows/
+**/data/*.zip
+**/artifacts/embeddings.npz
+# Generated local files
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+node_modules/
+.pytest_cache/
+
+# One-command local setup logs
+.meowmemo-runtime/

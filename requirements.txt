@@ -1,0 +1,11 @@
+tensorflow==2.21.0
+tf-keras==2.21.0
+scikit-learn==1.9.1
+scipy==1.18.1
+numpy==2.5.4
+soundfile==0.14.0
+fastapi==0.162.0
+uvicorn==0.54.0
+python-multipart==0.0.32
+requests==2.34.2
+Pillow>=11,<13
