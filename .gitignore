@@ -26,3 +26,7 @@ node_modules/
 
 # One-command local setup logs
 .meowmemo-runtime/
+
+# H2 experiment: downloaded noise recordings and cached features
+**/data/noise/
+**/artifacts/h2-cache/
