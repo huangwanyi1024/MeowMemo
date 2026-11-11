@@ -26,3 +26,7 @@ node_modules/
 
 # One-command local setup logs
 .meowmemo-runtime/
+
+# Local dataset research inputs and generated reports
+experiments/dataset_research/data/
+experiments/dataset_research/outputs/
