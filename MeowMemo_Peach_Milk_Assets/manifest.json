@@ -1,0 +1,602 @@
+[
+  {
+    "file": "backgrounds/living_room_scene.png",
+    "source_box": [
+      367,
+      58,
+      904,
+      643
+    ],
+    "type": "cropped panel (opaque)"
+  },
+  {
+    "file": "cats/orange_sitting.png",
+    "source_box": [
+      963,
+      63,
+      1082,
+      177
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "cats/gray_sitting.png",
+    "source_box": [
+      1091,
+      65,
+      1202,
+      177
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "cats/cream_sitting.png",
+    "source_box": [
+      1211,
+      62,
+      1338,
+      174
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "cats/gray_sleeping.png",
+    "source_box": [
+      1350,
+      68,
+      1514,
+      171
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "cats/orange_sleeping.png",
+    "source_box": [
+      941,
+      211,
+      1086,
+      293
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "cats/gray_peeking.png",
+    "source_box": [
+      1091,
+      210,
+      1192,
+      293
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "cats/calico_playful.png",
+    "source_box": [
+      1194,
+      205,
+      1313,
+      299
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "cats/orange_back.png",
+    "source_box": [
+      1313,
+      198,
+      1401,
+      303
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "cats/gray_waving.png",
+    "source_box": [
+      1411,
+      203,
+      1520,
+      304
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/paw.png",
+    "source_box": [
+      949,
+      345,
+      1032,
+      397
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/heart_solid.png",
+    "source_box": [
+      1040,
+      347,
+      1107,
+      395
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/heart_outline.png",
+    "source_box": [
+      1117,
+      345,
+      1182,
+      399
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/excitement.png",
+    "source_box": [
+      1187,
+      343,
+      1262,
+      401
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/flower_green.png",
+    "source_box": [
+      1285,
+      344,
+      1348,
+      399
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/flower_white.png",
+    "source_box": [
+      1355,
+      343,
+      1417,
+      401
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/sparkles.png",
+    "source_box": [
+      1432,
+      344,
+      1508,
+      400
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/bow.png",
+    "source_box": [
+      947,
+      403,
+      1065,
+      481
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/note.png",
+    "source_box": [
+      1078,
+      409,
+      1163,
+      481
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/scallop_label.png",
+    "source_box": [
+      1168,
+      414,
+      1273,
+      474
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/yarn.png",
+    "source_box": [
+      1271,
+      411,
+      1344,
+      481
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/fish.png",
+    "source_box": [
+      1347,
+      418,
+      1425,
+      473
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/mouse.png",
+    "source_box": [
+      1430,
+      419,
+      1515,
+      473
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "ui/share_card_frame.png",
+    "source_box": [
+      943,
+      525,
+      1091,
+      650
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "ui/photo_card_frame.png",
+    "source_box": [
+      1096,
+      533,
+      1192,
+      644
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "ui/cat_card_frame.png",
+    "source_box": [
+      1195,
+      523,
+      1303,
+      645
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "ui/cloud_bubble.png",
+    "source_box": [
+      1306,
+      535,
+      1437,
+      646
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "ui/flower_bubble.png",
+    "source_box": [
+      1440,
+      535,
+      1525,
+      645
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/sofa.png",
+    "source_box": [
+      19,
+      715,
+      165,
+      819
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/coffee_table.png",
+    "source_box": [
+      170,
+      737,
+      261,
+      801
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/flower_cushion.png",
+    "source_box": [
+      262,
+      739,
+      344,
+      804
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/cat_tree.png",
+    "source_box": [
+      337,
+      699,
+      446,
+      819
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/tv_stand.png",
+    "source_box": [
+      447,
+      718,
+      536,
+      818
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/desk.png",
+    "source_box": [
+      540,
+      704,
+      661,
+      821
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/window.png",
+    "source_box": [
+      661,
+      702,
+      765,
+      820
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/plant.png",
+    "source_box": [
+      767,
+      693,
+      824,
+      802
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/flower_plant.png",
+    "source_box": [
+      822,
+      695,
+      879,
+      801
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/hanging_plant.png",
+    "source_box": [
+      877,
+      692,
+      930,
+      802
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/bookshelf.png",
+    "source_box": [
+      22,
+      823,
+      127,
+      890
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/lamp.png",
+    "source_box": [
+      128,
+      822,
+      194,
+      896
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/photo_frame.png",
+    "source_box": [
+      194,
+      827,
+      262,
+      894
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/books.png",
+    "source_box": [
+      265,
+      832,
+      331,
+      893
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/basket.png",
+    "source_box": [
+      339,
+      834,
+      418,
+      895
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/food_bowl.png",
+    "source_box": [
+      427,
+      836,
+      504,
+      895
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/mug.png",
+    "source_box": [
+      509,
+      835,
+      568,
+      896
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/open_book.png",
+    "source_box": [
+      570,
+      838,
+      648,
+      890
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/closed_book.png",
+    "source_box": [
+      648,
+      832,
+      708,
+      895
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/green_pillow.png",
+    "source_box": [
+      709,
+      834,
+      774,
+      896
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/peach_pillow.png",
+    "source_box": [
+      773,
+      834,
+      833,
+      896
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "furniture/rug.png",
+    "source_box": [
+      829,
+      832,
+      927,
+      895
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "branding/logo.png",
+    "source_box": [
+      36,
+      951,
+      247,
+      999
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "branding/home_title.png",
+    "source_box": [
+      497,
+      942,
+      619,
+      999
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "branding/memory_title.png",
+    "source_box": [
+      619,
+      941,
+      792,
+      1000
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "branding/share_card_title.png",
+    "source_box": [
+      789,
+      942,
+      972,
+      999
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/cloud.png",
+    "source_box": [
+      1024,
+      949,
+      1124,
+      1007
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/paw_pattern.png",
+    "source_box": [
+      1142,
+      946,
+      1226,
+      1008
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/cat_bush.png",
+    "source_box": [
+      1267,
+      944,
+      1401,
+      1003
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "decorations/flowers.png",
+    "source_box": [
+      1430,
+      940,
+      1514,
+      1007
+    ],
+    "type": "isolated crop (approximate transparency)"
+  },
+  {
+    "file": "ui/navigation_bar.png",
+    "source_box": [
+      945,
+      724,
+      1288,
+      799
+    ],
+    "type": "cropped panel (opaque)"
+  },
+  {
+    "file": "ui/buttons_and_controls.png",
+    "source_box": [
+      17,
+      352,
+      336,
+      646
+    ],
+    "type": "cropped panel (opaque)"
+  }
+]

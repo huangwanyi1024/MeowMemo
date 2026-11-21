@@ -100,4 +100,6 @@ node work/meowmemo-local-ai/test_demo_seed.cjs
 
 Manual AI setup remains available: install Python 3.12 / FFmpeg / Ollama, run `python3.12 setup_local.py`, `ollama pull qwen3.5:4b`, start `ollama serve` if not running, copy the backend `.env.example` to `.env.local`, then run `python3 start.py --ai`.
 
-#
+## Dataset research
+
+Emma Yue’s reproducible CatMeows metadata, audio quality and leakage audit is documented in [experiments/dataset_research/README.md](experiments/dataset_research/README.md). It consumes the existing split manifest and adds preprocessing regression tests without changing the classifier. See [EMMA_INDIVIDUAL_CONTRIBUTION.md](EMMA_INDIVIDUAL_CONTRIBUTION.md) for individual scope and evidence.
