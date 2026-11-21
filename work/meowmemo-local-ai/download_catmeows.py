@@ -52,7 +52,9 @@ def download():
         key = entry.get('key', '')
         links = entry.get('links', {})
         url = links.get('content') or links.get('self') or links.get('download')
-        if not url or not key.lower().endswith(('.zip', '.wav')):
+        # Only dataset.zip holds the 440 labelled clips; extras.zip has supplementary
+        # recordings, 13 of which share the naming pattern but are not part of the dataset.
+        if not url or key.lower() != 'dataset.zip':
             continue
         print(f'Downloading {key} ({entry.get("size", "?")} bytes)...', flush=True)
         data = checked(fetch(url), entry.get('checksum'))

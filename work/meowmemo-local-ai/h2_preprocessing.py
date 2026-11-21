@@ -100,12 +100,44 @@ def mix_at_snr(clean, noise, snr_db, rng):
 
 
 def load_noise_bank(directory, max_files=200, max_seconds=60.0):
-    """Load WAV/FLAC/OGG noise files as band-limited 16 kHz mono arrays.
+    """Load WAV/FLAC/OGG noise files as band-limited 16 kHz mono arrays."""
+    return [audio for _, audio in load_noise_files(directory, max_files, max_seconds)]
+
+
+def noise_source(name):
+    """Original recording a noise file came from. ESC-50 names are fold-source-take-class.wav,
+    so 2-102414-A-17 and 2-102414-D-17 share source 102414; other names are their own source."""
+    parts = Path(name).stem.split('-')
+    return parts[1] if len(parts) == 4 and parts[1].isdigit() else Path(name).stem
+
+
+def split_noise_by_source(files, test_fraction=0.5, seed=42):
+    """Split (name, audio) pairs into train/test noise with no original recording on both sides."""
+    sources = sorted({noise_source(name) for name, _ in files})
+    order = np.random.default_rng(seed).permutation(len(sources))
+    n_test = max(1, min(len(sources) - 1, round(len(sources) * test_fraction)))
+    test_sources = {sources[i] for i in order[:n_test]}
+    train = [(n, a) for n, a in files if noise_source(n) not in test_sources]
+    test = [(n, a) for n, a in files if noise_source(n) in test_sources]
+    return train, test
+
+
+def augmented_version(clean, bank, seed, index, copy, snr_range=(5.0, 20.0)):
+    """Deterministic noisy training copy at a random SNR in `snr_range` (noise augmentation)."""
+    rng = np.random.default_rng([seed, index, copy, 7])
+    snr = float(rng.uniform(*snr_range))
+    noise = bank[int(rng.integers(len(bank)))]
+    return mix_at_snr(clean, noise, snr, rng)
+
+
+def load_noise_files(directory, max_files=200, max_seconds=60.0):
+    """Load noise files as (relative name, band-limited 16 kHz mono audio) pairs.
 
     Uses soundfile directly (not `model.read_audio`, which rejects files over 15.5 s).
     Files are sorted for reproducibility; near-silent files are skipped.
     """
-    paths = sorted(p for p in Path(directory).rglob('*')
+    root = Path(directory)
+    paths = sorted(p for p in root.rglob('*')
                    if p.suffix.lower() in {'.wav', '.flac', '.ogg'})[:max_files]
     bank = []
     for path in paths:
@@ -118,7 +150,7 @@ def load_noise_bank(directory, max_files=200, max_seconds=60.0):
             audio = resample_poly(audio, SR // g, sr // g)
         audio = band_limit(audio)
         if len(audio) >= SR // 4 and float(np.sqrt(np.mean(audio ** 2))) > 1e-5:
-            bank.append(audio)
+            bank.append((str(path.relative_to(root)), audio))
     if not bank:
         raise ValueError(f'No usable noise audio found in {directory}')
     return bank

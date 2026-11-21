@@ -87,34 +87,49 @@ def run(args):
     print(f'CatMeows: {len(files)} clips, {len(set(groups))} cats. Variants: {variants}')
     clean = [read_audio(p) for p in files]
     conditions = {'clean': clean}
-    noise_info = None
+    noise_info, aug_audio = None, []
     if args.noise_dir:
-        bank = pre.load_noise_bank(args.noise_dir)
-        noise_files = sorted(str(p.relative_to(args.noise_dir)) for p in Path(args.noise_dir).rglob('*')
-                             if p.suffix.lower() in {'.wav', '.flac', '.ogg'})
-        noise_info = {'directory': str(args.noise_dir), 'usable_files': len(bank),
-                      'fingerprint': cache_key(noise_files)}
-        for snr in args.snr:
-            conditions[f'snr{snr:g}dB'] = [pre.noisy_version(a, bank, snr, args.seed, i)
+        noise_files = pre.load_noise_files(args.noise_dir)
+        train_noise, test_noise = pre.split_noise_by_source(noise_files, seed=args.seed)
+        noise_info = {'directory': str(args.noise_dir), 'usable_files': len(noise_files),
+                      'test_noise': [n for n, _ in test_noise], 'train_noise': [n for n, _ in train_noise],
+                      'fingerprint': cache_key(sorted(n for n, _ in noise_files))}
+        test_bank = [a for _, a in test_noise]
+        for snr in args.snr:  # scored only on noise the model never trains on
+            conditions[f'snr{snr:g}dB'] = [pre.noisy_version(a, test_bank, snr, args.seed, i)
                                            for i, a in enumerate(clean)]
+        if args.augment_copies:
+            train_bank = [a for _, a in train_noise]
+            aug_audio = [pre.augmented_version(a, train_bank, args.seed, i, copy)
+                         for copy in range(args.augment_copies) for i, a in enumerate(clean)]
     encoder = AudioModel(classifier=False)
     key_parts = (names, args.seed, noise_info and noise_info['fingerprint'])
     feats = {v: {c: feature_set(encoder, audios, v, c, key_parts) for c, audios in conditions.items()}
              for v in variants}
+    extra = {}
+    if aug_audio:
+        y_aug = np.tile(y, args.augment_copies)
+        g_aug = np.tile(groups, args.augment_copies)
+        for v in variants:
+            x_aug, _ = feature_set(encoder, aug_audio, v, f'aug{args.augment_copies}', key_parts)
+            extra[v] = (x_aug, y_aug, g_aug)
 
     results = {}
     for condition in conditions:
         results[condition] = {}
         preds = {}
-        for v in variants:
-            scored, pred = evaluate_unseen_cats(feats[v]['clean'][0], feats[v][condition][0], y, groups)
-            preds[v] = pred
+        arms = [(v, v, None) for v in variants] + [(f'{v}+aug', v, extra[v]) for v in variants if v in extra]
+        for name, v, aug in arms:
+            scored, pred = evaluate_unseen_cats(feats[v]['clean'][0], feats[v][condition][0], y, groups,
+                                                extra=aug)
+            preds[name] = pred
             scored['cat_gate_pass_rate'] = float(np.mean(feats[v][condition][1] >= CAT_GATE))
-            results[condition][v] = scored
-        for v in variants:
-            if v != 'baseline':
-                results[condition][v]['vs_baseline'] = bootstrap_gain(
-                    y, preds['baseline'], preds[v], groups, n=args.bootstrap, seed=args.seed)
+            scored['trained_on'] = 'clean + noise-augmented copies' if aug is not None else 'clean'
+            results[condition][name] = scored
+        for name in preds:
+            if name != 'baseline':
+                results[condition][name]['vs_baseline'] = bootstrap_gain(
+                    y, preds['baseline'], preds[name], groups, n=args.bootstrap, seed=args.seed)
 
     report = {
         'hypothesis': 'H2: preprocessing raises macro-F1 on unseen cats and reduces the loss from household noise.',
@@ -126,6 +141,8 @@ def run(args):
         'dataset': {'name': 'CatMeows 1.0.2', 'clips': len(files), 'cats': int(len(set(groups))),
                     'class_counts': {l: int((y == l).sum()) for l in LABELS}},
         'noise': noise_info, 'snr_db': args.snr if args.noise_dir else [], 'seed': args.seed,
+        'augmentation': ({'copies_per_clip': args.augment_copies, 'snr_db_range': [5, 20],
+                          'noise': 'train_noise only'} if extra else None),
         'variants': variants, 'results': results,
         'runtime_seconds': round(time.time() - started, 1), 'python': platform.python_version(),
     }
@@ -137,13 +154,13 @@ def run(args):
 
 
 def print_summary(results):
-    print(f'\n{"condition":<12} {"variant":<24} {"acc":>6} {"macroF1":>8}  gain vs baseline [95% CI]')
+    print(f'\n{"condition":<12} {"variant":<28} {"acc":>6} {"macroF1":>8}  gain vs baseline [95% CI]')
     for condition, by_variant in results.items():
         for v, r in by_variant.items():
             cmp = r.get('vs_baseline')
             extra = (f'{cmp["gain"]:+.3f} [{cmp["ci95"][0]:+.3f}, {cmp["ci95"][1]:+.3f}]'
                      f'{"  supported" if cmp["supported"] else ""}') if cmp else '(reference)'
-            print(f'{condition:<12} {v:<24} {r["accuracy"]:6.3f} {r["macro_f1"]:8.3f}  {extra}')
+            print(f'{condition:<12} {v:<28} {r["accuracy"]:6.3f} {r["macro_f1"]:8.3f}  {extra}')
 
 
 def predict(args):
@@ -173,6 +190,8 @@ def main():
     r.add_argument('--variants', nargs='+', default=list(pre.VARIANTS))
     r.add_argument('--noise-dir', type=Path, help='folder of household noise WAV/FLAC/OGG files')
     r.add_argument('--snr', type=float, nargs='+', default=[20, 10, 5])
+    r.add_argument('--augment-copies', type=int, default=2,
+                   help='noisy training copies per clip (needs --noise-dir; 0 disables augmentation)')
     r.add_argument('--bootstrap', type=int, default=1000)
     r.add_argument('--seed', type=int, default=42)
     r.add_argument('--out', default=str(ARTIFACTS / 'h2-results.json'))

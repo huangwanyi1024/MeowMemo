@@ -76,6 +76,27 @@ class NoiseTests(unittest.TestCase):
         np.testing.assert_array_equal(a, pre.noisy_version(clean, bank, 10, seed=42, index=7))
         self.assertFalse(np.array_equal(a, pre.noisy_version(clean, bank, 10, seed=42, index=8)))
 
+    def test_noise_split_keeps_each_original_recording_on_one_side(self):
+        names = ['1-100210-A-36.wav', '2-102414-A-17.wav', '2-102414-D-17.wav', '3-100018-A-18.wav',
+                 '4-119720-A-18.wav', 'kitchen.wav']
+        files = [(n, np.zeros(10, dtype=np.float32)) for n in names]
+        self.assertEqual(pre.noise_source('2-102414-D-17.wav'), '102414')
+        train, test = pre.split_noise_by_source(files, seed=42)
+        self.assertTrue(train and test)
+        self.assertEqual(len(train) + len(test), len(files))
+        train_src = {pre.noise_source(n) for n, _ in train}
+        test_src = {pre.noise_source(n) for n, _ in test}
+        self.assertFalse(train_src & test_src)
+
+    def test_augmented_copies_are_deterministic_and_within_snr_range(self):
+        bank = [np.random.default_rng(i).normal(0, 0.05, 3 * SR).astype(np.float32) for i in range(2)]
+        clean = tone(500, 1, amp=0.1)
+        a = pre.augmented_version(clean, bank, seed=42, index=3, copy=0)
+        np.testing.assert_array_equal(a, pre.augmented_version(clean, bank, seed=42, index=3, copy=0))
+        self.assertFalse(np.array_equal(a, pre.augmented_version(clean, bank, seed=42, index=3, copy=1)))
+        snr = 10 * np.log10(power(clean) / power(a - clean))
+        self.assertTrue(5 - 0.2 <= snr <= 20 + 0.2, snr)
+
     def test_noise_bank_resamples_and_skips_silence(self):
         with tempfile.TemporaryDirectory() as tmp:
             t = np.arange(3 * 44100) / 44100
@@ -107,6 +128,15 @@ class EvaluationTests(unittest.TestCase):
         clean_score = evaluate_unseen_cats(self.x, self.x, self.y, self.groups)[0]['macro_f1']
         noisy_score = evaluate_unseen_cats(self.x, noisy, self.y, self.groups)[0]['macro_f1']
         self.assertLess(noisy_score, clean_score)
+
+    def test_augmented_rows_of_the_held_out_cat_are_never_used(self):
+        # Corrupted extra rows exist only for cat C00. When C00 is the held-out cat they must be
+        # excluded, so its predictions match a run with no extra rows at all.
+        mask = self.groups == 'C00'
+        bad = (self.x[mask] * -50, np.full(mask.sum(), 'food'), self.groups[mask])
+        _, plain = evaluate_unseen_cats(self.x, self.x, self.y, self.groups)
+        _, with_extra = evaluate_unseen_cats(self.x, self.x, self.y, self.groups, extra=bad)
+        np.testing.assert_array_equal(plain[mask], with_extra[mask])
 
     def test_bootstrap_identical_predictions_is_not_supported(self):
         out = bootstrap_gain(self.y, self.y, self.y, self.groups, n=200)

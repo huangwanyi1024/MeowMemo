@@ -9,20 +9,31 @@ CLASSIFIER_C = 1.0
 CLASSIFIER_KIND = 'logistic'
 
 
-def evaluate_unseen_cats(x_train, x_test, y, groups):
+def evaluate_unseen_cats(x_train, x_test, y, groups, extra=None):
     """Each cat takes one turn as the unseen test cat.
 
     `x_train` holds the features the model learns from (clean audio) and `x_test` the
     features it is scored on (clean or noisy). Row i of both must be the same clip.
+    `extra` = (x, y, groups) adds training rows such as noise-augmented copies; in each
+    round only the rows belonging to training cats are used, never the held-out cat's.
     Returns (metrics dict, out-of-fold predictions).
     """
     x_train, x_test = np.asarray(x_train), np.asarray(x_test)
     y, groups = np.asarray(y), np.asarray(groups)
     assert x_train.shape == x_test.shape and len(x_train) == len(y) == len(groups)
+    if extra is not None:
+        x_extra, y_extra, g_extra = (np.asarray(a) for a in extra)
+        assert len(x_extra) == len(y_extra) == len(g_extra)
     pred = np.empty(len(y), dtype=object)
     for tr, te in LeaveOneGroupOut().split(x_train, y, groups):
         assert not set(groups[tr]) & set(groups[te])
-        clf = pipeline(CLASSIFIER_C, CLASSIFIER_KIND).fit(x_train[tr], y[tr])
+        fit_x, fit_y = x_train[tr], y[tr]
+        if extra is not None:
+            keep = np.isin(g_extra, np.unique(groups[tr]))
+            assert not set(g_extra[keep]) & set(groups[te])
+            fit_x = np.vstack([fit_x, x_extra[keep]])
+            fit_y = np.concatenate([fit_y, y_extra[keep]])
+        clf = pipeline(CLASSIFIER_C, CLASSIFIER_KIND).fit(fit_x, fit_y)
         pred[te] = clf.predict(x_test[te])
     pred = pred.astype(str)
     result = metrics(y, pred)
