@@ -62,7 +62,7 @@ vm.runInContext(fs.readFileSync(path.join(web,'app.js'),'utf8').replace(/\niniti
  await vm.runInContext('nextAICaption(input,pool,currentText)',sandbox);assert.equal(poolCalls,3);
  sandbox.input={...sandbox.input,personality:'bossy'};
  await vm.runInContext('nextAICaption(input,pool,currentText)',sandbox);assert.equal(poolCalls,4);
- sandbox.catSVG=()=>'';sandbox.icon=()=>'';
+ sandbox.catIllustration=()=>'';sandbox.icon=()=>'';
  sandbox.memory={id:'rotation-test',catIds:['orange'],title:'Together',note:'',tags:[],funCaption:{...batch,text:'Visible caption'},captionBatches:{'orange:en':batch}};
  const panel=vm.runInContext('captionPanel(memory)',sandbox);
  assert.ok(panel.includes('Generate AI caption'));assert.ok(panel.includes('Visible caption'));
