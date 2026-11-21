@@ -2,7 +2,7 @@
 
 **Hypothesis (H2):** cleaning up audio before analysis (trimming silence, normalising loudness, reducing noise) raises macro-F1 for context classification (brushing / waiting for food / isolation) on cats the model has never heard, and reduces the accuracy lost to household noise.
 
-**Status:** prototype code and unit tests are in place. The full experiment has **not been run yet**; it needs the CatMeows download and the Python 3.12 environment. No results exist until `artifacts/h2-results.json` is produced.
+**Status (run 2026-11-21, 48 min on a 12-core laptop CPU):** results are in `artifacts/h2-results.json`. **H2 is not supported.** With leave-one-cat-out testing, the baseline scores macro-F1 0.454 on clean audio. No preprocessing step or combination improved it on clean audio; silence trimming lowered it (-0.032, 95% interval [-0.059, -0.001]), consistent with the clip-length shortcut in `artifacts/h2-shortcut-check.json`. Noise reduction lowered scores sharply under noise (for example -0.137 at 10 dB). Noise-augmented training (`+aug`) did not reliably help. One comparison passed the rule (`denoise+trim+normalize+aug` at 20 dB, +0.080 [+0.021, +0.137]), but it is 1 of 44 comparisons, does not repeat at 10 dB, 5 dB or on clean audio, and is likely chance. Noise also made the cat-sound check reject more clips (77% pass clean, 58% at 5 dB).
 
 ## Pass/fail rule (agreed before running)
 

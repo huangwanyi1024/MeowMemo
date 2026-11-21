@@ -1,0 +1,42 @@
+{
+  "removed_by_trim_seconds": {
+    "brushing": 0.203,
+    "food": 0.113,
+    "isolation": 0.251
+  },
+  "alpha": 0.05,
+  "original_length": {
+    "median_seconds_by_class": {
+      "brushing": 1.806,
+      "food": 1.608,
+      "isolation": 1.865
+    },
+    "accuracy": 0.47045454545454546,
+    "macro_f1": 0.44858630952380957,
+    "chance": {
+      "chance_macro_f1_median": 0.294,
+      "chance_macro_f1_95th": 0.349,
+      "p_value": 0.005,
+      "permutations": 200
+    },
+    "length_predicts_situation": true
+  },
+  "trimmed_length": {
+    "median_seconds_by_class": {
+      "brushing": 1.615,
+      "food": 1.516,
+      "isolation": 1.735
+    },
+    "accuracy": 0.3068181818181818,
+    "macro_f1": 0.29800993660015107,
+    "chance": {
+      "chance_macro_f1_median": 0.29,
+      "chance_macro_f1_95th": 0.339,
+      "p_value": 0.4179,
+      "permutations": 200
+    },
+    "length_predicts_situation": false
+  },
+  "warning": true,
+  "preprocessing_version": "h2-preprocessing-v1"
+}
