@@ -19,6 +19,8 @@
 | `h2_experiment.py` | `run`: scores every variant on clean and noisy audio and writes `artifacts/h2-results.json`. `predict`: labels real recordings (for the real-home check). |
 | `download_catmeows.py` | Downloads CatMeows v1.0.2 from Zenodo into `data/catmeows/`, verifies checksums, reports labels, sample rates and durations. |
 | `test_h2.py` | 14 unit tests; no TensorFlow, dataset or network needed. |
+| `h2_data_checks.py` | Checks to run before trusting results: `noise` (no animal sounds in the noise pool) and `shortcut` (can clip length alone predict the situation?). No TensorFlow. |
+| `test_h2_data_checks.py` | 6 unit tests for the data checks; no TensorFlow, dataset or network needed. |
 
 ## Setup
 
@@ -34,10 +36,21 @@ cd work/meowmemo-local-ai
 
 Put household noise recordings (WAV/FLAC/OGG) in `work/meowmemo-local-ai/data/noise/`. Candidate public sets: DEMAND, MUSAN, ESC-50; **confirm each licence before use** (several are non-commercial). Audio data and caches are git-ignored.
 
+## Data checks (run first)
+
+```sh
+../../.venv-meowmemo/bin/python h2_data_checks.py noise data/noise   # exit code 1 if animal clips are found
+../../.venv-meowmemo/bin/python h2_data_checks.py shortcut           # writes artifacts/h2-shortcut-check.json
+```
+
+- **Noise pool:** ESC-50 classes 0-9 are animals (dog, cat, rooster, ...). Mixing a cat clip into a meow adds a second cat, so these must be removed. Files not named like ESC-50 (DEMAND, MUSAN) are listed for a manual listen.
+- **Clip-length shortcut:** an early MeowMemo prototype's cat detector learned clip length instead of what a cat sounds like. Silence trimming changes clip length, so a gain from `trim` could come from length rather than cleaner audio. This check scores a length-only classifier with the same leave-one-cat-out test, before and after trimming, against shuffled lengths (a permutation test). If it prints a WARNING, report the length-only macro-F1 next to the `trim` result and treat a `trim` gain of similar size with caution.
+
 ## Run
 
 ```sh
 ../../.venv-meowmemo/bin/python test_h2.py                                   # quick checks
+../../.venv-meowmemo/bin/python test_h2_data_checks.py                       # data-check tests
 ../../.venv-meowmemo/bin/python h2_experiment.py run                         # clean audio only
 ../../.venv-meowmemo/bin/python h2_experiment.py run --noise-dir data/noise  # adds 20/10/5 dB noise
 ../../.venv-meowmemo/bin/python h2_experiment.py predict --variant trim my-recording.m4a
