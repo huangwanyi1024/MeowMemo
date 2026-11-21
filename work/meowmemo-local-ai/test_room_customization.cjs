@@ -1,9 +1,9 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const root=path.resolve(__dirname,'../../outputs/meowmemo-prototype');
-const sandbox={console,structuredClone,Date,Math,Map,WeakMap,Blob,URL,AbortSignal,crypto:require('node:crypto').webcrypto,
+const sandbox={console,structuredClone,Date,Math,Map,WeakMap,Blob,URL,URLSearchParams,AbortSignal,crypto:require('node:crypto').webcrypto,
  document:{addEventListener(){},querySelector(){return{addEventListener(){}}}},window:{addEventListener(){}},location:{hostname:'127.0.0.1',protocol:'http:',hash:''},setTimeout,clearTimeout,setInterval(){}};
 vm.createContext(sandbox);
-for(const file of ['scene.js','captions.js','shop.js','rooms.js','app.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8').replace(/\ninitialize\(\);\s*$/,''),sandbox);
+for(const file of ['scene.js','captions.js','shop.js','rooms.js','home-v3.js','app.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8').replace(/\ninitialize\(\);\s*$/,''),sandbox);
 (async()=>{
  for(const type of ['living','bedroom','bathroom','other']){
   sandbox.type=type;
@@ -13,11 +13,11 @@ for(const file of ['scene.js','captions.js','shop.js','rooms.js','app.js'])vm.ru
   const cats=vm.runInContext('roomCatLayouts(state.cats)',sandbox);
   assert.equal(cats.length,2);assert.notDeepEqual([cats[0].x,cats[0].y],[cats[1].x,cats[1].y]);
   for(const c of cats){assert.ok(c.left>=0&&c.left+c.width<=100);assert.ok(c.top>=0&&c.top<95)}
-  assert.ok(vm.runInContext('viewRoom()',sandbox).includes('Customize room'));
+  assert.ok(vm.runInContext('viewRoom()',sandbox).includes('Customize Room'));
   assert.ok(vm.runInContext('customRoomSVG(room,true)',sandbox).includes('room-draft-floor'));
  }
  vm.runInContext("state.rooms={activeId:'original',items:[]}",sandbox);
- assert.ok(vm.runInContext('viewRoom()',sandbox).includes('Your irregular living room'));
+ assert.ok(vm.runInContext('viewRoom()',sandbox).includes('v3-room-art'));
  assert.equal(vm.runInContext("cleanRoom({id:'bad',type:'__proto__'})",sandbox),null);
  const sanitized=vm.runInContext("cleanRoom({id:'\"<bad>',type:'living',wall:'red;script',objects:[{kind:'sofa',x:-100,y:1000,size:10},{kind:'__proto__'}]})",sandbox);
  assert.equal(sanitized.objects.length,1);assert.equal(sanitized.objects[0].x,10);assert.equal(sanitized.objects[0].y,93);assert.equal(sanitized.objects[0].size,1.4);assert.equal(sanitized.wall,'#fff1d7');assert.equal(sanitized.id,'bad');

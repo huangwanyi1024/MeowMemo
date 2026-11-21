@@ -1,9 +1,9 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const root=path.resolve(__dirname,'../../outputs/meowmemo-prototype'),closeHandlers=[];
-const sandbox={console,structuredClone,Date,Math,Map,WeakMap,Blob,URL,AbortSignal,crypto:require('node:crypto').webcrypto,
+const sandbox={console,structuredClone,Date,Math,Map,WeakMap,Blob,URL,URLSearchParams,AbortSignal,crypto:require('node:crypto').webcrypto,
  document:{addEventListener(){},querySelector(){return{addEventListener(type,fn){if(type==='close')closeHandlers.push(fn)},querySelectorAll(){return[]}}}},window:{addEventListener(){}},location:{hostname:'127.0.0.1',protocol:'http:',hash:''},setTimeout,clearTimeout,setInterval(){}};
 vm.createContext(sandbox);
-for(const file of ['scene.js','captions.js','shop.js','rooms.js','app.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8').replace(/\ninitialize\(\);\s*$/,''),sandbox);
+for(const file of ['scene.js','captions.js','shop.js','rooms.js','home-v3.js','app.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8').replace(/\ninitialize\(\);\s*$/,''),sandbox);
 (async()=>{
  sandbox.audio=new Blob(['original meow bytes'],{type:'audio/wav'});sandbox.photo=Object.assign(new Blob(['original image bytes'],{type:'image/jpeg'}),{name:'cats.jpg'});sandbox.video=Object.assign(new Blob(['original video bytes'],{type:'video/mp4'}),{name:'cats.mp4'});
  vm.runInContext("state.memories=[{id:'audio',title:'Dinner',note:'Waiting for dinner',tags:['Together'],catIds:['orange','tabby'],capture:{kind:'audio',blob:audio},media:[],confirmed:'food',funCaption:{text:'Our dinner truce',source:'owner-edited'},analysis:{status:'uncertain'}}];memoryEdit={id:'audio',originalCount:0,media:[]};state.shop.balance=27",sandbox);

@@ -26,3 +26,66 @@ node_modules/
 
 # One-command local setup logs
 .meowmemo-runtime/
+
+# Local dataset research inputs and generated reports
+experiments/dataset_research/data/
+experiments/dataset_research/outputs/
+
+# Local databases and their journal files (browser IndexedDB is outside this repo)
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3-journal
+*.sqlite3-shm
+*.sqlite3-wal
+
+# Private keys, credential stores and local service configuration
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+.netrc
+.npmrc
+.pypirc
+.aws/
+.ssh/
+.secrets/
+secrets/
+credentials/
+*credentials*.json
+*credentials*.yaml
+*credentials*.yml
+service-account*.json
+
+# Private local uploads; approved demo media stays in the tracked asset folders
+uploads/
+local-uploads/
+private-uploads/
+
+# Tool caches and temporary/editor output
+.cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
