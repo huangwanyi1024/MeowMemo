@@ -1,0 +1,86 @@
+# H2 experiment: audio preprocessing
+
+**Hypothesis (H2):** cleaning up audio before analysis (trimming silence, normalising loudness, reducing noise) raises macro-F1 for context classification (brushing / waiting for food / isolation) on cats the model has never heard, and reduces the accuracy lost to household noise.
+
+**Status (run 2026-11-21, 48 min on a 12-core laptop CPU):** results are in `artifacts/h2-results.json`. **H2 is not supported.** With leave-one-cat-out testing, the baseline scores macro-F1 0.454 on clean audio. No preprocessing step or combination improved it on clean audio; silence trimming lowered it (-0.032, 95% interval [-0.059, -0.001]), consistent with the clip-length shortcut in `artifacts/h2-shortcut-check.json`. Noise reduction lowered scores sharply under noise (for example -0.137 at 10 dB). Noise-augmented training (`+aug`) did not reliably help. One comparison passed the rule (`denoise+trim+normalize+aug` at 20 dB, +0.080 [+0.021, +0.137]), but it is 1 of 44 comparisons, does not repeat at 10 dB, 5 dB or on clean audio, and is likely chance. Noise also made the cat-sound check reject more clips (77% pass clean, 58% at 5 dB).
+
+**To see or rerun the results:** the results are committed, so there is no need to rerun just to see them. `H2_colab.ipynb` shows them without installing anything and can rerun a quick check (about 1 minute) or the full experiment on Google Colab or any Jupyter. To run locally, follow Setup and Run below.
+
+## Pass/fail rule (agreed before running)
+
+- **Supported** if a variant's macro-F1 gain over the baseline has a 95% bootstrap interval above zero, resampling whole cats (1,000 resamples).
+- **Rejected** otherwise. That would point to data, not audio quality, as the limit.
+- The classifier is fixed for every variant (StandardScaler + balanced logistic regression, C = 1, the deployed settings), so differences come from preprocessing alone.
+
+## Files
+
+| File | What it does |
+| --- | --- |
+| `h2_preprocessing.py` | Silence trimming, loudness normalisation, optional noise reduction, 4 kHz band-limiting, noise mixing at a set signal-to-noise ratio, noise-folder loader. NumPy/SciPy only. |
+| `h2_evaluation.py` | Leave-one-cat-out evaluation and the cat-level bootstrap. Reuses `pipeline` and `metrics` from `train.py`. |
+| `h2_experiment.py` | `run`: scores every variant on clean and noisy audio and writes `artifacts/h2-results.json`. `predict`: labels real recordings (for the real-home check). |
+| `download_catmeows.py` | Downloads CatMeows v1.0.2 from Zenodo into `data/catmeows/`, verifies checksums, reports labels, sample rates and durations. |
+| `download_noise.py` | Downloads the 20 ESC-50 noise clips used for the committed results into `data/noise/esc50/` (pinned ESC-50 commit), checks each file's SHA-256 and the noise fingerprint stored in `artifacts/h2-results.json`. |
+| `H2_colab.ipynb` | Notebook for Colab or Jupyter: shows the committed results, or reruns a quick check or the full experiment and compares the numbers. |
+| `test_h2.py` | 18 unit tests; no TensorFlow, dataset or network needed. |
+| `h2_data_checks.py` | Checks to run before trusting results: `noise` (no animal sounds in the noise pool) and `shortcut` (can clip length alone predict the situation?). No TensorFlow. |
+| `test_h2_data_checks.py` | 6 unit tests for the data checks; no TensorFlow, dataset or network needed. |
+
+## Setup
+
+From the repository root:
+
+```sh
+python3.12 setup_local.py                      # creates .venv-meowmemo (TensorFlow, scikit-learn, ...)
+cd work/meowmemo-local-ai
+../../.venv-meowmemo/bin/python download_catmeows.py
+../../.venv-meowmemo/bin/python download_catmeows.py --verify   # expect 440 clips, 21 cats, 127/92/221
+../../.venv-meowmemo/bin/pip install noisereduce               # optional: enables the denoise variants
+../../.venv-meowmemo/bin/python download_noise.py              # the 20 ESC-50 noise clips; expect "OK: identical ..."
+```
+
+**To reproduce the committed results, use `download_noise.py`.** The noise conditions and the noisy-copy training are built from exactly these 20 clips, so any other noise gives different numbers. `h2_experiment.py` uses every audio file under `data/noise/`, so keep other audio out of that folder; `download_noise.py --verify` warns about extra files. To try your own noise instead, put WAV/FLAC/OGG files in `data/noise/` (candidate public sets: DEMAND, MUSAN, ESC-50; **confirm each licence before use**, several are non-commercial). Audio data, caches and rerun results are git-ignored.
+
+## Data checks (run first)
+
+```sh
+../../.venv-meowmemo/bin/python h2_data_checks.py noise data/noise   # exit code 1 if animal clips are found
+../../.venv-meowmemo/bin/python h2_data_checks.py shortcut           # writes artifacts/h2-shortcut-check.json
+```
+
+- **Noise pool:** ESC-50 classes 0-9 are animals (dog, cat, rooster, ...). Mixing a cat clip into a meow adds a second cat, so these must be removed. Files not named like ESC-50 (DEMAND, MUSAN) are listed for a manual listen.
+- **Clip-length shortcut:** an early MeowMemo prototype's cat detector learned clip length instead of what a cat sounds like. Silence trimming changes clip length, so a gain from `trim` could come from length rather than cleaner audio. This check scores a length-only classifier with the same leave-one-cat-out test, before and after trimming, against shuffled lengths (a permutation test). If it prints a WARNING, report the length-only macro-F1 next to the `trim` result and treat a `trim` gain of similar size with caution.
+
+## Run
+
+```sh
+../../.venv-meowmemo/bin/python test_h2.py                                   # quick checks
+../../.venv-meowmemo/bin/python test_h2_data_checks.py                       # data-check tests
+../../.venv-meowmemo/bin/python h2_experiment.py run --variants baseline trim --out artifacts/h2-rerun/quick.json   # quick check, about 1 min
+../../.venv-meowmemo/bin/python h2_experiment.py run --noise-dir data/noise --out artifacts/h2-rerun/full.json      # full rerun, 48 min on 12 cores
+../../.venv-meowmemo/bin/python h2_experiment.py predict --variant trim my-recording.m4a
+```
+
+- **Quick check:** clean audio, `baseline` and `trim` only. It should print macro-F1 0.454 for `baseline` and a `trim` gain of -0.032 [-0.059, -0.001], the same as the committed results.
+- **Full rerun:** the same settings as the committed results (all 6 variants, with and without noisy-copy training, clean plus 20/10/5 dB noise).
+- **Always pass `--out` for reruns.** Without it, `run` overwrites the committed `artifacts/h2-results.json`. `artifacts/h2-rerun/` is git-ignored.
+- A rerun on other hardware or package versions can differ in the third decimal place.
+
+Variants: `baseline`, `trim`, `normalize`, `denoise`, `trim+normalize`, `denoise+trim+normalize`. Pick a subset with `--variants trim normalize`. Features are cached in `artifacts/h2-cache/`, so reruns are fast.
+
+## How it maps to the plan
+
+1. **Fair baseline:** leave-one-cat-out (train on 20 cats, test on the 21st, repeat). The original 6-cat test split has already been used twice and is not reused.
+2. **Noise stress test:** train on clean clips, score on clips mixed with household noise at 20, 10 and 5 dB. Every variant gets the identical noise segment per clip, so comparisons are paired. Noise is band-limited to 4 kHz to match CatMeows.
+3. **One step at a time, then combinations:** each variant is applied to both training and test audio.
+4. **Decide:** the `vs_baseline` block in the results gives the gain, its 95% interval and `supported`.
+5. **Real-home check:** `predict` band-limits recordings to 4 kHz first, then reports the label, probabilities and whether a cat sound was detected. A handful of files is a qualitative check, not a score.
+
+The results also include `cat_gate_pass_rate`: the share of clips passing the app's cat-sound check (YAMNet Cat/Meow/Purr score >= 0.10) under each condition.
+
+## Things to know
+
+- **CatMeows audio is 8 kHz** (checked on the 3 bundled clips; `--verify` checks all 440), so the model never sees sound above 4 kHz.
+- **The MFCC half of the features is already peak-normalised** inside `mfcc_features`, so loudness normalisation can only affect the YAMNet half.
+- **Mean pooling:** YAMNet produces one embedding per ~0.96 s window (0.48 s hop) and `model.py` averages them, so silence dilutes the meow. This is the main reason to expect trimming to help.
+- **Ethics and terms:** use only public data and normal, everyday behaviour; never create distress to obtain a recording. CatMeows is for scientific, non-commercial use with acknowledgement of Ludovico et al.
