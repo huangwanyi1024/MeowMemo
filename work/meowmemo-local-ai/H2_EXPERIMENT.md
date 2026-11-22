@@ -4,6 +4,8 @@
 
 **Status (run 2026-11-21, 48 min on a 12-core laptop CPU):** results are in `artifacts/h2-results.json`. **H2 is not supported.** With leave-one-cat-out testing, the baseline scores macro-F1 0.454 on clean audio. No preprocessing step or combination improved it on clean audio; silence trimming lowered it (-0.032, 95% interval [-0.059, -0.001]), consistent with the clip-length shortcut in `artifacts/h2-shortcut-check.json`. Noise reduction lowered scores sharply under noise (for example -0.137 at 10 dB). Noise-augmented training (`+aug`) did not reliably help. One comparison passed the rule (`denoise+trim+normalize+aug` at 20 dB, +0.080 [+0.021, +0.137]), but it is 1 of 44 comparisons, does not repeat at 10 dB, 5 dB or on clean audio, and is likely chance. Noise also made the cat-sound check reject more clips (77% pass clean, 58% at 5 dB).
 
+**To see or rerun the results:** the results are committed, so there is no need to rerun just to see them. `H2_colab.ipynb` shows them without installing anything and can rerun a quick check (about 1 minute) or the full experiment on Google Colab or any Jupyter. To run locally, follow Setup and Run below.
+
 ## Pass/fail rule (agreed before running)
 
 - **Supported** if a variant's macro-F1 gain over the baseline has a 95% bootstrap interval above zero, resampling whole cats (1,000 resamples).
@@ -18,7 +20,9 @@
 | `h2_evaluation.py` | Leave-one-cat-out evaluation and the cat-level bootstrap. Reuses `pipeline` and `metrics` from `train.py`. |
 | `h2_experiment.py` | `run`: scores every variant on clean and noisy audio and writes `artifacts/h2-results.json`. `predict`: labels real recordings (for the real-home check). |
 | `download_catmeows.py` | Downloads CatMeows v1.0.2 from Zenodo into `data/catmeows/`, verifies checksums, reports labels, sample rates and durations. |
-| `test_h2.py` | 14 unit tests; no TensorFlow, dataset or network needed. |
+| `download_noise.py` | Downloads the 20 ESC-50 noise clips used for the committed results into `data/noise/esc50/` (pinned ESC-50 commit), checks each file's SHA-256 and the noise fingerprint stored in `artifacts/h2-results.json`. |
+| `H2_colab.ipynb` | Notebook for Colab or Jupyter: shows the committed results, or reruns a quick check or the full experiment and compares the numbers. |
+| `test_h2.py` | 18 unit tests; no TensorFlow, dataset or network needed. |
 | `h2_data_checks.py` | Checks to run before trusting results: `noise` (no animal sounds in the noise pool) and `shortcut` (can clip length alone predict the situation?). No TensorFlow. |
 | `test_h2_data_checks.py` | 6 unit tests for the data checks; no TensorFlow, dataset or network needed. |
 
@@ -32,9 +36,10 @@ cd work/meowmemo-local-ai
 ../../.venv-meowmemo/bin/python download_catmeows.py
 ../../.venv-meowmemo/bin/python download_catmeows.py --verify   # expect 440 clips, 21 cats, 127/92/221
 ../../.venv-meowmemo/bin/pip install noisereduce               # optional: enables the denoise variants
+../../.venv-meowmemo/bin/python download_noise.py              # the 20 ESC-50 noise clips; expect "OK: identical ..."
 ```
 
-Put household noise recordings (WAV/FLAC/OGG) in `work/meowmemo-local-ai/data/noise/`. Candidate public sets: DEMAND, MUSAN, ESC-50; **confirm each licence before use** (several are non-commercial). Audio data and caches are git-ignored.
+**To reproduce the committed results, use `download_noise.py`.** The noise conditions and the noisy-copy training are built from exactly these 20 clips, so any other noise gives different numbers. `h2_experiment.py` uses every audio file under `data/noise/`, so keep other audio out of that folder; `download_noise.py --verify` warns about extra files. To try your own noise instead, put WAV/FLAC/OGG files in `data/noise/` (candidate public sets: DEMAND, MUSAN, ESC-50; **confirm each licence before use**, several are non-commercial). Audio data, caches and rerun results are git-ignored.
 
 ## Data checks (run first)
 
@@ -51,10 +56,15 @@ Put household noise recordings (WAV/FLAC/OGG) in `work/meowmemo-local-ai/data/no
 ```sh
 ../../.venv-meowmemo/bin/python test_h2.py                                   # quick checks
 ../../.venv-meowmemo/bin/python test_h2_data_checks.py                       # data-check tests
-../../.venv-meowmemo/bin/python h2_experiment.py run                         # clean audio only
-../../.venv-meowmemo/bin/python h2_experiment.py run --noise-dir data/noise  # adds 20/10/5 dB noise
+../../.venv-meowmemo/bin/python h2_experiment.py run --variants baseline trim --out artifacts/h2-rerun/quick.json   # quick check, about 1 min
+../../.venv-meowmemo/bin/python h2_experiment.py run --noise-dir data/noise --out artifacts/h2-rerun/full.json      # full rerun, 48 min on 12 cores
 ../../.venv-meowmemo/bin/python h2_experiment.py predict --variant trim my-recording.m4a
 ```
+
+- **Quick check:** clean audio, `baseline` and `trim` only. It should print macro-F1 0.454 for `baseline` and a `trim` gain of -0.032 [-0.059, -0.001], the same as the committed results.
+- **Full rerun:** the same settings as the committed results (all 6 variants, with and without noisy-copy training, clean plus 20/10/5 dB noise).
+- **Always pass `--out` for reruns.** Without it, `run` overwrites the committed `artifacts/h2-results.json`. `artifacts/h2-rerun/` is git-ignored.
+- A rerun on other hardware or package versions can differ in the third decimal place.
 
 Variants: `baseline`, `trim`, `normalize`, `denoise`, `trim+normalize`, `denoise+trim+normalize`. Pick a subset with `--variants trim normalize`. Features are cached in `artifacts/h2-cache/`, so reruns are fast.
 

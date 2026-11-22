@@ -8,6 +8,7 @@ import soundfile as sf
 import h2_preprocessing as pre
 from h2_evaluation import evaluate_unseen_cats, bootstrap_gain
 from download_catmeows import NAME
+import download_noise
 
 SR = pre.SR
 
@@ -158,6 +159,13 @@ class DatasetTests(unittest.TestCase):
         self.assertTrue(all(NAME.match(n) for n in names))
         extras = [p.name for p in (Path(__file__).parent / 'data' / 'extras').glob('*.wav')]
         self.assertFalse(any(NAME.match(n) for n in extras))
+
+    def test_noise_download_list_matches_the_committed_results(self):
+        noise = json.loads((Path(__file__).parent / 'artifacts' / 'h2-results.json').read_text())['noise']
+        used = sorted(noise['test_noise'] + noise['train_noise'])
+        self.assertEqual(used, sorted(f'{download_noise.SUBDIR}/{n}' for n in download_noise.CLIPS))
+        self.assertEqual(download_noise.fingerprint(used), noise['fingerprint'])
+        self.assertEqual(download_noise.FINGERPRINT, noise['fingerprint'])
 
 
 if __name__ == '__main__':
